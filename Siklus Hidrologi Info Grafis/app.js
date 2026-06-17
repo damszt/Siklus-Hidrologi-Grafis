@@ -15,7 +15,7 @@
   let W, H, particles = [], animId;
 
   function resize() {
-    W = canvas.width  = window.innerWidth;
+    W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
@@ -107,9 +107,9 @@ const stageData = {
 // 3. INTERACTIVE CYCLE DIAGRAM
 // ============================================================
 (function initCycleDiagram() {
-  const nodes  = document.querySelectorAll('.stage-node');
-  const cards  = document.querySelectorAll('.stage-card');
-  const panel  = document.getElementById('info-panel-inner');
+  const nodes = document.querySelectorAll('.stage-node');
+  const cards = document.querySelectorAll('.stage-card');
+  const panel = document.getElementById('info-panel-inner');
 
   if (!nodes.length || !panel) return;
 
@@ -291,13 +291,13 @@ const stageData = {
 
   let current = 0, score = 0, answered = false;
 
-  const numEl      = document.getElementById('quiz-num');
+  const numEl = document.getElementById('quiz-num');
   const questionEl = document.getElementById('quiz-question');
-  const optionsEl  = document.getElementById('quiz-options');
+  const optionsEl = document.getElementById('quiz-options');
   const feedbackEl = document.getElementById('quiz-feedback');
   const progressEl = document.getElementById('quiz-progress-bar');
-  const resultEl   = document.getElementById('quiz-result');
-  const qWrapEl    = document.querySelector('.quiz-question-wrap');
+  const resultEl = document.getElementById('quiz-result');
+  const qWrapEl = document.querySelector('.quiz-question-wrap');
   const restartBtn = document.getElementById('btn-quiz-restart');
 
   if (!numEl) return;
@@ -305,23 +305,23 @@ const stageData = {
   function renderQuestion() {
     answered = false;
     feedbackEl.style.display = 'none';
-    resultEl.style.display   = 'none';
-    qWrapEl.style.display    = '';
+    resultEl.style.display = 'none';
+    qWrapEl.style.display = '';
 
     const btnNext = document.getElementById('btn-next-quiz');
     if (btnNext) btnNext.remove();
 
     const q = questions[current];
-    numEl.textContent      = `Soal ${current + 1} / ${questions.length}`;
+    numEl.textContent = `Soal ${current + 1} / ${questions.length}`;
     questionEl.textContent = q.q;
     progressEl.style.width = `${((current) / questions.length) * 100}%`;
 
     optionsEl.innerHTML = '';
     q.opts.forEach((opt, i) => {
       const btn = document.createElement('button');
-      btn.className    = 'quiz-opt';
-      btn.textContent  = opt;
-      btn.id           = `quiz-opt-${i}`;
+      btn.className = 'quiz-opt';
+      btn.textContent = opt;
+      btn.id = `quiz-opt-${i}`;
       btn.addEventListener('click', () => handleAnswer(i));
       optionsEl.appendChild(btn);
     });
@@ -331,7 +331,7 @@ const stageData = {
     if (answered) return;
     answered = true;
 
-    const q    = questions[current];
+    const q = questions[current];
     const opts = document.querySelectorAll('.quiz-opt');
     const correct = chosen === q.ans;
 
@@ -343,14 +343,14 @@ const stageData = {
 
     if (correct) score++;
 
-    feedbackEl.textContent  = correct ? q.exp : `❌ Kurang tepat. ${q.exp}`;
-    feedbackEl.className    = `quiz-feedback ${correct ? 'correct' : 'wrong'}`;
+    feedbackEl.textContent = correct ? q.exp : `❌ Kurang tepat. ${q.exp}`;
+    feedbackEl.className = `quiz-feedback ${correct ? 'correct' : 'wrong'}`;
     feedbackEl.style.display = 'block';
 
     // Next button
     const nextBtn = document.createElement('button');
     nextBtn.className = 'btn-next-quiz';
-    nextBtn.id        = 'btn-next-quiz';
+    nextBtn.id = 'btn-next-quiz';
     nextBtn.textContent = current < questions.length - 1 ? 'Soal Berikutnya →' : 'Lihat Hasil 🎉';
     nextBtn.addEventListener('click', () => {
       current++;
@@ -364,7 +364,7 @@ const stageData = {
   }
 
   function showResult() {
-    qWrapEl.style.display    = 'none';
+    qWrapEl.style.display = 'none';
     feedbackEl.style.display = 'none';
     const btnNext = document.getElementById('btn-next-quiz');
     if (btnNext) btnNext.remove();
@@ -385,9 +385,9 @@ const stageData = {
       desc = `Jangan menyerah! Baca kembali materi Siklus Hidrologi di atas dan coba lagi. Kamu pasti bisa!`;
     }
 
-    document.getElementById('result-icon').textContent  = icon;
+    document.getElementById('result-icon').textContent = icon;
     document.getElementById('result-title').textContent = title;
-    document.getElementById('result-desc').textContent  = desc;
+    document.getElementById('result-desc').textContent = desc;
     resultEl.style.display = 'block';
   }
 
@@ -432,9 +432,9 @@ document.getElementById('btn-explore')?.addEventListener('click', e => {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const el  = entry.target;
+      const el = entry.target;
       const end = parseInt(el.dataset.count, 10);
-      let   val = 0;
+      let val = 0;
       const dur = 1500;
       const step = end / (dur / 16);
       const timer = setInterval(() => {
@@ -481,5 +481,5 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-console.log('%c💧 Siklus Hidrologi Infografis', 'color:#38bdf8;font-size:18px;font-weight:bold;');
+console.log('%c🔄 Siklus Hidrologi Infografis', 'color:#38bdf8;font-size:18px;font-weight:bold;');
 console.log('%cDibuat oleh Mahasiswa Universitas Indraprasta PGRI', 'color:#2dd4bf;font-size:12px;');
