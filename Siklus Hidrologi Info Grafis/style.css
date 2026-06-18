@@ -309,129 +309,69 @@ section { position: relative; z-index: 1; }
 .cycle-diagram {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 0.9;
-  min-height: 380px;
+  aspect-ratio: 3200 / 2950;
+  background-image: url('siklus-hidrologi-infografis.jpg');
+  background-size: 100% auto;
+  background-position: top;
+  background-repeat: no-repeat;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: visible; /* Allow pulse animation to go outside */
 }
 
-.cycle-arrows {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.flow-line {
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-  animation: drawLine 1.5s ease forwards;
-}
-.flow-line:nth-child(3) { animation-delay: 0.3s; }
-.flow-line:nth-child(4) { animation-delay: 0.6s; }
-.flow-line:nth-child(5) { animation-delay: 0.9s; }
-.flow-line:nth-child(6) { animation-delay: 1.2s; }
-
-@keyframes drawLine {
-  to { stroke-dashoffset: 0; }
-}
-
-/* center label */
-.center-label {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  pointer-events: none;
-}
-
-.center-icon {
-  font-size: 2.5rem;
-  animation: float 4s ease-in-out infinite;
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-.center-text {
-  font-family: var(--font-main);
-  font-weight: 800;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  background: linear-gradient(135deg, #38bdf8, #2dd4bf);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.2;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
-}
-
-/* ---- Stage Nodes ---- */
+/* ---- Stage Nodes (Interactive Overlays) ---- */
 .stage-node {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  background: rgba(255,255,255,0.05);
-  border: 2px solid rgba(56,189,248,0.3);
-  backdrop-filter: blur(12px);
-  border-radius: var(--radius-lg);
-  padding: 0.75rem 1rem;
+  background: rgba(56, 189, 248, 0.02);
+  border: 2.5px dashed rgba(56, 189, 248, 0.45);
+  border-radius: 8px;
   cursor: pointer;
   transition: var(--transition);
   z-index: 10;
-  min-width: 90px;
+  outline: none;
+  padding: 0;
+  display: block;
 }
 
 .stage-node:hover,
 .stage-node.active {
-  background: rgba(56,189,248,0.15);
-  border-color: var(--sky-400);
-  transform: scale(1.08);
-  box-shadow: 0 0 24px rgba(56,189,248,0.4);
-}
-
-.node-icon { font-size: 1.6rem; line-height: 1; }
-.node-label {
-  font-family: var(--font-main);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #e0f2fe;
-  text-align: center;
-  white-space: nowrap;
+  background: rgba(56, 189, 248, 0.15);
+  border: 2.5px solid var(--sky-400);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.55);
+  transform: scale(1.03);
 }
 
 /* pulse ring */
 .node-pulse {
   position: absolute;
-  inset: -4px;
+  inset: -6px;
   border-radius: inherit;
   border: 2px solid var(--sky-400);
   opacity: 0;
   animation: pulse 2.5s ease-out infinite;
+  pointer-events: none;
 }
 
-.stage-node:nth-child(3) .node-pulse { animation-delay: 0s; }
-.stage-node:nth-child(4) .node-pulse { animation-delay: 0.5s; }
-.stage-node:nth-child(5) .node-pulse { animation-delay: 1s; }
-.stage-node:nth-child(6) .node-pulse { animation-delay: 1.5s; }
-.stage-node:nth-child(7) .node-pulse { animation-delay: 2s; }
+.stage-node:nth-child(1) .node-pulse { animation-delay: 0s; }
+.stage-node:nth-child(2) .node-pulse { animation-delay: 0.5s; }
+.stage-node:nth-child(3) .node-pulse { animation-delay: 1s; }
+.stage-node:nth-child(4) .node-pulse { animation-delay: 1.5s; }
+.stage-node:nth-child(5) .node-pulse { animation-delay: 2s; }
 
 @keyframes pulse {
   0%   { opacity: 0.7; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.4); }
+  100% { opacity: 0; transform: scale(1.15, 1.35); }
 }
 
-/* Node positions (percentage-based for responsiveness) */
-.node-evaporasi  { top: 2%;  left: 50%; transform: translateX(-50%); }
-.node-kondensasi { top: 20%; right: 2%; }
-.node-presipitasi{ bottom: 20%; right: 2%; }
-.node-infiltrasi { bottom: 2%; left: 50%; transform: translateX(-50%); }
-.node-runoff     { top: 20%; left: 2%; }
+/* Node positions (percentage-based relative to 3200x2950 image area) */
+.node-evaporasi  { top: 52%; left: 78.5%; width: 19%; height: 8.5%; }
+.node-kondensasi { top: 40.5%; left: 45.2%; width: 19%; height: 8.5%; }
+.node-presipitasi{ top: 40.5%; left: 8.5%; width: 19%; height: 8.5%; }
+.node-runoff     { top: 72.8%; left: 8.5%; width: 20%; height: 8.5%; }
+.node-infiltrasi { top: 87.8%; left: 23.8%; width: 26%; height: 8.5%; }
 
-.node-evaporasi:hover, .node-evaporasi.active  { transform: translateX(-50%) scale(1.08); }
-.node-infiltrasi:hover, .node-infiltrasi.active{ transform: translateX(-50%) scale(1.08); }
+.node-evaporasi:hover, .node-evaporasi.active  { transform: scale(1.03); }
+.node-infiltrasi:hover, .node-infiltrasi.active{ transform: scale(1.03); }
 
 /* ---- Info Panel ---- */
 .info-panel {
@@ -1051,7 +991,4 @@ section { position: relative; z-index: 1; }
   .stages-grid { grid-template-columns: 1fr; }
   .langkah-grid { grid-template-columns: 1fr; }
   .footer-content { flex-direction: column; }
-  .stage-node { padding: 0.5rem 0.6rem; min-width: 70px; }
-  .node-icon { font-size: 1.2rem; }
-  .node-label { font-size: 0.6rem; }
 }

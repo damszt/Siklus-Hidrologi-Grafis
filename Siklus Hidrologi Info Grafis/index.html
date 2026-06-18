@@ -81,169 +81,24 @@
     <div class="cycle-wrapper">
       <!-- Central diagram -->
       <div class="cycle-diagram" id="cycle-diagram">
-        <!-- SVG cycle arrows -->
-        <svg class="cycle-arrows" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2dd4bf;stop-opacity:1" />
-            </linearGradient>
-            <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#166534;stop-opacity:0.8" />
-              <stop offset="100%" style="stop-color:#052e16;stop-opacity:0.9" />
-            </linearGradient>
-            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#0c2340;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#0a3d62;stop-opacity:1" />
-            </linearGradient>
-            <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.8" />
-              <stop offset="100%" style="stop-color:#0369a1;stop-opacity:0.8" />
-            </linearGradient>
-            <marker id="ah" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
-              <polygon points="0 0, 9 3.5, 0 7" fill="#38bdf8" opacity="0.9" />
-            </marker>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <!-- Background scene -->
-          <!-- Sky background -->
-          <ellipse cx="300" cy="260" rx="210" ry="200" fill="url(#skyGrad)" opacity="0.5" />
-
-          <!-- Mountains -->
-          <polygon points="190,360 250,280 310,360" fill="#1e3a5f" opacity="0.7" />
-          <polygon points="250,360 320,270 390,360" fill="#1a3352" opacity="0.8" />
-          <!-- Snow caps -->
-          <polygon points="250,280 262,305 238,305" fill="white" opacity="0.6" />
-          <polygon points="320,270 333,298 307,298" fill="white" opacity="0.7" />
-
-          <!-- Ground -->
-          <ellipse cx="300" cy="375" rx="175" ry="25" fill="url(#groundGrad)" opacity="0.7" />
-
-          <!-- River / lake -->
-          <ellipse cx="260" cy="375" rx="55" ry="12" fill="url(#waterGrad)" opacity="0.8" />
-          <!-- Water shine -->
-          <ellipse cx="250" cy="372" rx="20" ry="3" fill="white" opacity="0.15" />
-
-          <!-- Trees left -->
-          <rect x="168" y="340" width="6" height="24" fill="#15803d" opacity="0.8" />
-          <ellipse cx="171" cy="338" rx="12" ry="16" fill="#16a34a" opacity="0.75" />
-          <!-- Trees right -->
-          <rect x="406" y="345" width="6" height="20" fill="#15803d" opacity="0.8" />
-          <ellipse cx="409" cy="343" rx="11" ry="14" fill="#16a34a" opacity="0.75" />
-
-          <!-- Cloud shapes in center-top -->
-          <ellipse cx="300" cy="195" rx="38" ry="22" fill="#94a3b8" opacity="0.25" />
-          <ellipse cx="280" cy="200" rx="25" ry="18" fill="#94a3b8" opacity="0.2" />
-          <ellipse cx="322" cy="200" rx="22" ry="16" fill="#94a3b8" opacity="0.2" />
-
-          <!-- Sun rays top-right -->
-          <circle cx="480" cy="95" r="22" fill="#fbbf24" opacity="0.25" filter="url(#glow)" />
-          <circle cx="480" cy="95" r="14" fill="#fde68a" opacity="0.4" />
-          <line x1="480" y1="65" x2="480" y2="58" stroke="#fde68a" stroke-width="2" opacity="0.5" />
-          <line x1="480" y1="125" x2="480" y2="132" stroke="#fde68a" stroke-width="2" opacity="0.5" />
-          <line x1="450" y1="95" x2="443" y2="95" stroke="#fde68a" stroke-width="2" opacity="0.5" />
-          <line x1="510" y1="95" x2="517" y2="95" stroke="#fde68a" stroke-width="2" opacity="0.5" />
-          <line x1="459" y1="74" x2="454" y2="69" stroke="#fde68a" stroke-width="2" opacity="0.5" />
-          <line x1="501" y1="116" x2="506" y2="121" stroke="#fde68a" stroke-width="2" opacity="0.5" />
-
-          <!-- Animated main cycle orbit -->
-          <ellipse cx="300" cy="260" rx="200" ry="185" fill="none" stroke="url(#arrowGrad)" stroke-width="1.5"
-            stroke-dasharray="18 8" opacity="0.2">
-            <animateTransform attributeName="transform" type="rotate" from="0 300 260" to="360 300 260" dur="40s"
-              repeatCount="indefinite" />
-          </ellipse>
-
-          <!-- FLOW ARROWS (fat, visible) -->
-          <!-- Top: evaporasi → kondensasi -->
-          <path class="flow-line" id="fl-1" d="M 215,145 Q 300,105 385,145" fill="none" stroke="#38bdf8"
-            stroke-width="3" marker-end="url(#ah)" filter="url(#glow)" />
-
-          <!-- Right: kondensasi → presipitasi -->
-          <path class="flow-line" id="fl-2" d="M 450,195 Q 490,260 450,325" fill="none" stroke="#38bdf8"
-            stroke-width="3" marker-end="url(#ah)" filter="url(#glow)" />
-
-          <!-- Bottom-right: presipitasi → infiltrasi -->
-          <path class="flow-line" id="fl-3" d="M 405,385 Q 355,420 295,415" fill="none" stroke="#38bdf8"
-            stroke-width="3" marker-end="url(#ah)" filter="url(#glow)" />
-
-          <!-- Bottom-left: infiltrasi → runoff -->
-          <path class="flow-line" id="fl-4" d="M 200,415 Q 145,420 155,355" fill="none" stroke="#38bdf8"
-            stroke-width="3" marker-end="url(#ah)" filter="url(#glow)" />
-
-          <!-- Left: runoff → evaporasi -->
-          <path class="flow-line" id="fl-5" d="M 148,320 Q 108,260 148,195" fill="none" stroke="#38bdf8"
-            stroke-width="3" marker-end="url(#ah)" filter="url(#glow)" />
-
-          <!-- Animated water droplets along path -->
-          <circle r="4" fill="#7dd3fc" opacity="0.9" filter="url(#glow)">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="0s">
-              <mpath href="#fl-1" />
-            </animateMotion>
-          </circle>
-          <circle r="4" fill="#7dd3fc" opacity="0.9" filter="url(#glow)">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="0.6s">
-              <mpath href="#fl-2" />
-            </animateMotion>
-          </circle>
-          <circle r="4" fill="#7dd3fc" opacity="0.9" filter="url(#glow)">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="1.2s">
-              <mpath href="#fl-3" />
-            </animateMotion>
-          </circle>
-          <circle r="4" fill="#7dd3fc" opacity="0.9" filter="url(#glow)">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="1.8s">
-              <mpath href="#fl-4" />
-            </animateMotion>
-          </circle>
-          <circle r="4" fill="#7dd3fc" opacity="0.9" filter="url(#glow)">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="2.4s">
-              <mpath href="#fl-5" />
-            </animateMotion>
-          </circle>
-        </svg>
-
-        <!-- CENTER label -->
-        <div class="center-label">
-          <div class="center-icon">💧</div>
-          <div class="center-text">Siklus<br />Hidrologi</div>
-        </div>
-
-        <!-- Stage nodes -->
+        <!-- Clickable hotspots overlaying the infographic image -->
         <button class="stage-node node-evaporasi" id="btn-evaporasi" data-stage="evaporasi" aria-label="Evaporasi">
-          <div class="node-icon">☀️</div>
-          <div class="node-label">Evaporasi</div>
           <div class="node-pulse"></div>
         </button>
 
         <button class="stage-node node-kondensasi" id="btn-kondensasi" data-stage="kondensasi" aria-label="Kondensasi">
-          <div class="node-icon">☁️</div>
-          <div class="node-label">Kondensasi</div>
           <div class="node-pulse"></div>
         </button>
 
-        <button class="stage-node node-presipitasi" id="btn-presipitasi" data-stage="presipitasi"
-          aria-label="Presipitasi">
-          <div class="node-icon">🌧️</div>
-          <div class="node-label">Presipitasi</div>
+        <button class="stage-node node-presipitasi" id="btn-presipitasi" data-stage="presipitasi" aria-label="Presipitasi">
           <div class="node-pulse"></div>
         </button>
 
         <button class="stage-node node-infiltrasi" id="btn-infiltrasi" data-stage="infiltrasi" aria-label="Infiltrasi">
-          <div class="node-icon">🌱</div>
-          <div class="node-label">Infiltrasi</div>
           <div class="node-pulse"></div>
         </button>
 
         <button class="stage-node node-runoff" id="btn-runoff" data-stage="runoff" aria-label="Run Off">
-          <div class="node-icon">🌊</div>
-          <div class="node-label">Run Off</div>
           <div class="node-pulse"></div>
         </button>
       </div>
